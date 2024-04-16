@@ -41,10 +41,10 @@ return new class extends Migration
             $table->increments("id");
             $table->boolean("important_task");
             $table->string("theme");
-            $table->float("planned_sale");
-            $table->float("planned_purchase");
-            $table->float("actual_sale");
-            $table->float("actual_purchase");
+            $table->float("planned_sale", 2);
+            $table->float("planned_purchase", 2);
+            $table->float("actual_sale", 2);
+            $table->float("actual_purchase", 2);
             $table->integer("transaction_probability");
             $table->integer("bonus");
             $table->integer("taxi");
@@ -52,6 +52,8 @@ return new class extends Migration
             $table->date("date_of_payment");
             $table->boolean("system_messages");
             $table->string("note")->default("Текущий статус:...");
+            $table->integer("bill_number");
+            $table->integer("realization");
         });
 
         Schema::create("calendar_quarters_supplies", function (Blueprint $table) {
