@@ -207,6 +207,7 @@
             </div>
         </div>
 
+        <script src="./static/selectionLstAndDatepicker.js"></script>
         <script src="./static/addTask.js"></script>
     </body>
 </html>

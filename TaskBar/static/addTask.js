@@ -2,54 +2,8 @@ let calendarBtns = $(".calendar_btn"),
     directorLst = $(".director_lst")[0],
     executorLst = $(".executor_lst")[0],
     taskTypeLst = $(".task_type_lst")[0],
-    projectsLst = $(".projects_lst")[0];
-
-
-function setDatepickers() {
-  [".date_inp_start", ".date_inp_completion", ".deadline_inp_date"].forEach((datepickerClass) => {
-    new AirDatepicker(datepickerClass, {
-      timepicker: true
-    })
-  })
-}
-
-function openAndCloseLst(e) {
-  let lstBtn = e.currentTarget,
-      lst = lstBtn.nextElementSibling;
-
-  function checkAndCloseOthersLst() {
-    let openedLst = $(".selection_lst").filter((_, lst) => {
-      return getComputedStyle(lst).display !== "none";
-    });
-
-    for (let i = 0; i < openedLst.length; i++) {
-      openedLst[i].previousElementSibling.classList.toggle("rotated");
-      openedLst[i].removeAttribute("style");
-    }
-  }
-
-  lstBtn.classList.toggle("rotated");
-
-  if (getComputedStyle(lst).display === "none") {
-    checkAndCloseOthersLst();
-    lst.style.display = "flex";
-  } else {
-    lst.removeAttribute("style");
-  }
-}
-
-function selectLstOption(option, input, lst) {
-  let lstOptionTxt = option.innerText;
-
-  if (lstOptionTxt === "Ничего") {
-    input.value = "";
-  } else {
-    input.value = lstOptionTxt;
-  }
-
-  lst.style.display = "none";
-  input.parentNode.classList.toggle("rotated");
-}
+    projectsLst = $(".projects_lst")[0],
+    datepickerArr = [".date_inp_start", ".date_inp_completion", ".deadline_inp_date"];
 
 function selectExecutor(e) {
   let selectedLi = e.currentTarget,
@@ -91,4 +45,4 @@ function addEvent() {
 }
 
 addEvent();
-setDatepickers();
+setDatepickers(datepickerArr, {timepicker: true});

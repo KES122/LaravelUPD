@@ -1,66 +1,20 @@
-let testItems,
-    taskBar = $(".task_bar_box_content")[0],
-    taskBarHeader = $(".task_bar_box_header")[0],
-    taskBarBoxContent = $(".task_bar_box_content")[0],
-    taskBarHeaderColumnWidth = getTaskBarHeaderColumnsWidth();
+let tasksHeaderColumns = $(".tasks_header div:not(.arrows)"),
+    taskTableSizing = 4;
 
-
-
-function getTaskBarHeaderColumnsWidth() {
-  return [...taskBarHeader.children].map(column => getComputedStyle(column).width);  
-}
-
-testItems = [
-    {
-        num: 96752,
-        theme: "Тест 01-02-34",
-        status: "0. Формирование предложения",
-        dateOfCompletion: "2024-02-03",
-        customer: "ABC Реклама",
-        node: "Текущий статус: След. шаги",
-        salePlan: "",
-        account: "",
-        sales: "",
-        quarter: "1Q-2",
-        year: "2024"
-    }
+itemsArr = [
+  ["", "96752", "Тест 01-02-34", "0.Формирование предложения", "2024-02-03", "ABC Реклама", "Текущий статус: формирование предложения", "", "", "", "1Q-2", "2024"],
+  ["", "96771", "Тест 02-02-24", "0.Формирование преложения", "2024-02-02", "АБС", "Текущий статус: формирование предложения", "", "", "", "1Q-2", "2024"],
+  ["", "95732", "тестовая задача 3", "0.Формирование предложения", "2024-01-18", "Гамма Логистик", "Текущий статус: формирование предложения", "", "", "", "1Q-1", "2024"],
+  ["", "95731", "Тестовая задача по поставкам", "0.Формирование предложения", "2024-01-18", "Гамма Логистик", "Текущий статус: формирование предложения", "", "", "", "1Q-1", "2024"],
+  /*
+    ["95733", "тестовая задача 1", "0.Формирование предложения", "2022-01-19", "Гамма Логистик", "Текущий статус: формирование предложения", "", "", "", "1Q-2", "2022"],
+    ["95221", "тестовая задача 2", "0.Формирование предложения", "2023-01-20", "АБС", "Текущий статус: формирование предложения", "", "", "", "1Q-3", "2023"],
+    ["95724", "тестовая задача 4", "0.Формирование предложения", "2024-01-21", "АБС", "Текущий статус: Формирование предложения", "", "", "", "1Q-4", "2024"] */
 ];
 
-function addItemsInTaskContent() {
-  for (let i = 0; i < testItems.length; i++) {
-    task = document.createElement("div");
-    task.classList.add("task");
-
-    let j = 0;
-    for (value of Object.values(testItems[i])) {
-      divColumn = document.createElement("div");  
-      p = document.createElement("p");
-      
-      p.innerText = value;
-      divColumn.style.width = taskBarHeaderColumnWidth[j];
-
-      divColumn.appendChild(p);
-      task.appendChild(divColumn);
-      j++;
-    }
-
-    taskBarBoxContent.appendChild(task);
-  }
-}
-
-function dragDropAndEnter(e) {
-  if (e.type === "dragenter") {
-    this.classList.add("active_upload_win");
-  }
-
-  if (e.type === "dragleave") {
-    this.classList.remove("active_upload_win");
-  }
-}
-
 function addEvent() {
-
+  
 }
 
-addItemsInTaskContent();
 addEvent();
+renderTable(itemsArr);
