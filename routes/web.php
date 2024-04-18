@@ -8,7 +8,8 @@ Route::view('/', 'welcome');
 Route::view('/task_search','task_search');
 
 // Auth::routes([
-//     'register' => false, // Registration Routes...
+//     'register' => false, 
+// Registration Routes...
 // ]);
 
 
