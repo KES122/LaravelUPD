@@ -11,29 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('main_inf', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('text_info')->nullable();
+            $table->binary('file_info')->nullable();
+            $table->text('list_info')->nullable();
+            $table->string('url_info', 255)->nullable();
             $table->timestamps();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('parsing_info', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('main_inf_id'); // Внешний ключ
+            $table->foreign('main_inf_id')->references('id')->on('main_inf')->onDelete('cascade');
+            $table->text('parsing_data');
+            $table->timestamps();
         });
 
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
+        Schema::create('time_task_info', function (Blueprint $table) {
+            $table->id();
+            $table->string('task_number');
+            $table->string('task_name');
+            $table->string('status');
+            $table->date('assigned_date');
+            $table->string('record_type');
+            $table->timestamps(); 
         });
     }
 
@@ -42,8 +44,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('main_inf');
+        Schema::dropIfExists('parsing_info');
+        Schema::dropIfExists('time_task_info');
     }
 };
